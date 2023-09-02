@@ -21,10 +21,10 @@ class CascadingPalindrome:
         return result if result else "This does not have a palindrome in it."
 
     except AttributeError:
-      # print("Only a parameter of the string type is supported")
       return "Only a parameter of the string type is supported."
 
-
+# time complexity: O(N)
+# space complexity: O(N)
 word1 = CascadingPalindrome().checkCascading("1230321")
 word2 = CascadingPalindrome().checkCascading("1230321 09234 0124210")
 word3 = CascadingPalindrome().checkCascading("abcd5dcba 1230321 09234 0124210")
@@ -37,7 +37,11 @@ word5 = CascadingPalindrome().checkCascading([])
 
 word6 = CascadingPalindrome().checkCascading("racecar")
 word7 = CascadingPalindrome().checkCascading("madam")
+
+# this ensures that the function returns the correct output when the parameter is not a string
 word8 = CascadingPalindrome().checkCascading(1)
+
+# this ensures that the function returns the correct output when the parameter is not a palindrome
 word9 = CascadingPalindrome().checkCascading("king")
 word10 = CascadingPalindrome().checkCascading("01.121")
 
