@@ -4,8 +4,15 @@ from .serializers import (
 )
 from rest_framework.views import APIView
 import datetime
+from rest_framework.response import Response
+from rest_framework import renderers
+
+
+
 
 class HNG(APIView):
+    renderer_classes = [renderers.JSONRenderer]
+
     def get(self, request):
         # Deserialize and validate the query parameters
         serializer = QueryParametersSerializer(data=request.query_params)
@@ -15,13 +22,16 @@ class HNG(APIView):
 
             # You can now use slack_name and track in your logic
             # For example, you can return a response with these values
+            now = datetime.datetime.utcnow()
+
+            utc_time = now.strftime("%Y-%m-%dT%H:%M:%SZ")
             data = {
                 "slack_name": slack_name,
                 "current_day": datetime.datetime.now().strftime("%A"),
-                "utc_time": datetime.datetime.utcnow(),
+                "utc_time": utc_time,
                 "track": track,
-                "github_file_url": "https://github.com/username/repo/blob/main/file_name.ext",
-                "github_repo_url": "https://github.com/rhedwan/repo",
+                "github_file_url": "https://github.com/rhedwan/CDTProgram/blob/main/HNG/query/views.py",
+                "github_repo_url": "https://github.com/rhedwan/CDTProgram/tree/main/HNG",
                 "status_code": 200,
             }
             return Response(data)
