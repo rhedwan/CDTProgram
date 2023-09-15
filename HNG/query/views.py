@@ -1,11 +1,23 @@
 from .serializers import (
 
-    QueryParametersSerializer,
+    QueryParametersSerializer, UserSerializer
 )
+from .models import User
 from rest_framework.views import APIView
 import datetime
 from rest_framework.response import Response
-from rest_framework import renderers
+from rest_framework import renderers, status, generics
+
+
+class UserListCreate(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class UserRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    lookup_field = "id"
 
 
 
